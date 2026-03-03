@@ -1,8 +1,4 @@
 """
-demo.py - Interactive Streamlit Demo for the Mini Python Compiler
-
-Run with:  streamlit run src/demo.py
-
 Tabs:
   1. Code Editor + Output
   2. AST Viewer
@@ -344,21 +340,29 @@ with st.sidebar:
 
 # ─── main area ────────────────────────────────────────────────────────────────
 
-st.header("🐍 Mini Python Compiler — Interactive Demo")
+st.header("Mini Python Compiler — Interactive Demo")
 
 # Initialize session state
 if 'code' not in st.session_state:
     st.session_state.code = EXAMPLES["Hello World"]
 
-if load_btn:
+if 'load_btn' not in st.session_state:
+    st.session_state.load_btn = False
+
+if st.button("Load Example", key="load_example"):
+    st.session_state.load_btn = True
     st.session_state.code = EXAMPLES[selected]
+
+# Reset after loading so it doesn't fire repeatedly
+if st.session_state.load_btn:
+    st.session_state.load_btn = False
 
 # Code editor
 code = st.text_area(
     "Enter your code here:",
-    value=st.session_state.code,
+    value=st.session_state.get("code", EXAMPLES["Hello World"]),
     height=280,
-    key="editor",
+    key="editor"
     help="Write mini-Python code and click Run"
 )
 st.session_state.code = code
