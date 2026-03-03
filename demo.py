@@ -362,7 +362,7 @@ code = st.text_area(
     "Enter your code here:",
     value=st.session_state.get("code", EXAMPLES["Hello World"]),
     height=280,
-    key="editor"
+    key="editor",
     help="Write mini-Python code and click Run"
 )
 st.session_state.code = code
