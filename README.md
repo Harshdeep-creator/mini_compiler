@@ -11,13 +11,8 @@ A full-featured **Mini Python Compiler & Interpreter** built from scratch in Pyt
 pip install streamlit
 
 # Run the interactive demo
-streamlit run src/demo.py
+python -m streamlit run demo.py
 
-# Or run a script directly
-python src/interpreter.py examples/full_demo.py
-
-# Run tests
-python -m pytest tests/ -v
 ```
 
 ---
