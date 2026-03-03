@@ -346,21 +346,16 @@ st.header("Mini Python Compiler — Interactive Demo")
 if 'code' not in st.session_state:
     st.session_state.code = EXAMPLES["Hello World"]
 
-if 'load_btn' not in st.session_state:
-    st.session_state.load_btn = False
-
-if st.button("Load Example", key="load_example"):
-    st.session_state.load_btn = True
-    st.session_state.code = EXAMPLES[selected]
-
-# Reset after loading so it doesn't fire repeatedly
-if st.session_state.load_btn:
-    st.session_state.load_btn = False
+# Sidebar example loader
+with st.sidebar:
+    selected = st.selectbox("Load example:", list(EXAMPLES.keys()))
+    if st.button("Load Example"):
+        st.session_state.code = EXAMPLES[selected]  # directly update code
 
 # Code editor
 code = st.text_area(
     "Enter your code here:",
-    value=st.session_state.get("code", EXAMPLES["Hello World"]),
+    value=st.session_state.code,  # always read from session state
     height=280,
     key="editor",
     help="Write mini-Python code and click Run"
