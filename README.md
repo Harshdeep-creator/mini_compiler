@@ -1,10 +1,10 @@
-# 🐍 Mini Python Compiler
+#  Mini Python Compiler
 
 A full-featured **Mini Python Compiler & Interpreter** built from scratch in Python — covering the entire W3Schools Python tutorial feature set. Designed as a portfolio project demonstrating compiler fundamentals: lexical analysis, parsing, AST construction, semantic analysis, and tree-walking interpretation.
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ```bash
 # Install dependency
@@ -22,7 +22,7 @@ python -m pytest tests/ -v
 
 ---
 
-## 🏗️ Compiler Pipeline
+##  Compiler Pipeline
 
 ```
 Source Code
@@ -58,7 +58,7 @@ Source Code
 
 ---
 
-## 📦 Project Structure
+##  Project Structure
 
 ```
 mini_python_compiler/
@@ -80,7 +80,7 @@ mini_python_compiler/
 
 ---
 
-## ✅ Supported Language Features
+##  Supported Language Features
 
 | Category | Features |
 |---|---|
@@ -112,7 +112,7 @@ mini_python_compiler/
 
 ---
 
-## 🖥️ Interactive Demo
+##  Interactive Demo
 
 The Streamlit demo (`src/demo.py`) provides:
 
@@ -125,7 +125,7 @@ The Streamlit demo (`src/demo.py`) provides:
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ```bash
 python -m pytest tests/test_compiler.py -v
@@ -139,7 +139,7 @@ The test suite covers:
 
 ---
 
-## ⚡ Design Decisions
+##  Design Decisions
 
 - **No regex for parsing** — pure recursive descent for clarity and control
 - **Indentation via INDENT/DEDENT tokens** — matches CPython's approach
@@ -150,25 +150,25 @@ The test suite covers:
 
 ---
 
-## 📸 Demo Screenshot
+##  Demo Screenshot
 
 Run `streamlit run src/demo.py` and open `http://localhost:8501` to see:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  🐍 Mini Python Compiler — Interactive Demo                  │
+│   Mini Python Compiler — Interactive Demo                  │
 ├─────────────────────────────┬───────────────────────────────┤
-│  Code Editor                │  📤 Output                    │
+│  Code Editor                │   Output                    │
 │  ─────────────────────────  │  ──────────────────────────── │
 │  def factorial(n):          │  3628800                      │
 │      if n <= 1:             │                               │
-│          return 1           │  🌳 AST                       │
+│          return 1           │   AST                       │
 │      return n*factorial(n-1)│  ──────────────────────────── │
 │  print(factorial(10))       │  Program(2 statements)        │
 │                             │  ├─ FunctionDef(factorial)    │
 │                             │  └─ Print(...)                │
 │                             │                               │
-│                             │  📋 Symbol Table              │
+│                             │   Symbol Table              │
 │                             │  factorial │ fn │ line 1      │
 └─────────────────────────────┴───────────────────────────────┘
 ```
