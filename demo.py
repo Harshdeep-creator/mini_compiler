@@ -325,8 +325,7 @@ for row in matrix:
 # ─── sidebar ──────────────────────────────────────────────────────────────────
 
 with st.sidebar:
-    st.image("https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg", width=60)
-    st.title("Mini Python Compiler")
+    st.markdown("## 🐍 Mini Python Compiler")
     st.caption("Lexer → Parser → AST → Semantic → Interpreter")
     st.divider()
     st.subheader("📚 Examples")
@@ -346,29 +345,43 @@ with st.sidebar:
 
 st.header("🐍 Mini Python Compiler — Interactive Demo")
 
-# Initialize session state
-if 'code' not in st.session_state:
+# ── session state initialisation ──────────────────────────────────
+# 'code'       : source of truth for the editor content
+# 'editor_key' : integer bumped every time we want to force a fresh
+#                text_area widget (the only reliable way on Streamlit)
+if "code" not in st.session_state:
     st.session_state.code = EXAMPLES["Hello World"]
+if "editor_key" not in st.session_state:
+    st.session_state.editor_key = 0
 
+# ── load-example button handler ───────────────────────────────────
 if load_btn:
     st.session_state.code = EXAMPLES[selected]
+    # Bump the key so Streamlit destroys the old text_area widget
+    # and creates a fresh one pre-filled with the new code.
+    st.session_state.editor_key += 1
+    st.rerun()
 
-# Code editor
+# ── code editor ───────────────────────────────────────────────────
+# The dynamic key forces a widget re-create whenever an example is
+# loaded, so `value=` is always respected.
 code = st.text_area(
     "Enter your code here:",
     value=st.session_state.code,
     height=280,
-    key="editor",
-    help="Write mini-Python code and click Run"
+    key=f"editor_{st.session_state.editor_key}",
+    help="Write mini-Python code and click Run",
 )
+# Keep session state in sync with whatever the user types
 st.session_state.code = code
 
 col_run, col_clear = st.columns([1, 5])
 with col_run:
-    run_btn = st.button(" Run", type="primary", use_container_width=True)
+    run_btn = st.button("▶️ Run", type="primary", use_container_width=True)
 with col_clear:
-    if st.button(" Clear"):
+    if st.button("🗑️ Clear"):
         st.session_state.code = ""
+        st.session_state.editor_key += 1
         st.rerun()
 
 # ─── compilation & execution ─────────────────────────────────────────────────
